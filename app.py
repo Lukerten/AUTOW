@@ -1,4 +1,5 @@
 from rich.console import Console
+import time
 from random import choice
 from game.words import word_list
 from game.game import game
@@ -12,6 +13,7 @@ if __name__ == '__main__':
     for i in range (ITERATIONS):
         # plays a fresh game of Wordle 
         scores.append (game(console, choice(word_list)))
+        time.sleep(2)
     
     # Score tracking 
     scores.sort();
