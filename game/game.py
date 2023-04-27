@@ -32,7 +32,7 @@ def check_answer (guess, answer):
             pattern.append( squares["correct_place"])
             result += correct_place(letter)
         elif (letter in answer):
-            letters.append({"letter": letter, "index" : 0xF+i})
+            letters.append({"letter": letter, "index" : i+ 16})
             pattern.append( squares["correct_letter"])
             result += correct_letter(letter)
         else:
@@ -52,11 +52,11 @@ def game (console, answer):
     #* Game loop:
     while not solved:
         iteration += 1
-        guess = solver(guessed_words,word_list)
+        guess = solver(guessed_letters,word_list)
 
         #* check if guess is a valid input
         while guess not in word_list or guess in guessed_words:
-            guess = solver(guessed_words,word_list)
+            guess = solver(guessed_letters,word_list)
         pattern, letters = check_answer(guess, answer) 
 
         #* Round Evaluation

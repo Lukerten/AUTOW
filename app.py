@@ -19,6 +19,7 @@ if __name__ == '__main__':
     highest_score = min(scores)
     lowest_score = max(scores)
 
+    console.print ("Rounds Played :" ,ITERATIONS)
     console.print ("Average Score :" ,average_score)
     console.print ("Highest Score :" ,highest_score)
     console.print ("Lowest Score  :" ,lowest_score)
