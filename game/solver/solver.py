@@ -2,7 +2,8 @@ from random import choice
 
 def solver (previous_guesses, word_list):    
     words = filterlist(word_list,previous_guesses)
-    return choice(words)
+    selection = choice (words)
+    return selection
 
 def filterlist(word_list, guesses):
     words = word_list

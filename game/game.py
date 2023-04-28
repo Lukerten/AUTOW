@@ -1,8 +1,10 @@
 from rich.prompt import Prompt
 from rich.console import Console
 from random import choice
-from game.words import word_list
 from game.solver.solver import solver
+from time import sleep
+from game.solver.evaluation import evaluateGuess
+from game.words import generate_word_list
 
 # Text Highlighting on Command-Line
 def correct_place(letter):
@@ -39,21 +41,23 @@ def check_answer (guess, answer):
             letters.append({"letter": letter, "index" : -1})
             pattern.append( squares["incorrect_letter"])
             result += incorrect_letter(letter)
-    return ''.join(pattern+[" "]+result), letters
+    return ''.join([" "] + pattern+[" "]+result), letters
 
 # Game Loop
 def game (console, answer):
+    word_list = generate_word_list()
     iteration = 0
     solved = False
     guessed_words = []
     guessed_letters = []
     full_pattern = []
 
+
+
     #* Game loop:
     while not solved:
         iteration += 1
         guess = solver(guessed_letters,word_list)
-
         #* check if guess is a valid input
         while guess not in word_list or guess in guessed_words:
             guess = solver(guessed_letters,word_list)
@@ -67,8 +71,9 @@ def game (console, answer):
             solved = True
 
         #* print results
-        # console.print(result)
+        roundEvaluation = evaluateGuess(word_list, guessed_letters)
+        console.print(pattern, *roundEvaluation )
+        sleep(0.25)
 
-    console.print(*full_pattern, sep="\n")
-    console.print(iteration)
+    console.print(" ")
     return iteration
